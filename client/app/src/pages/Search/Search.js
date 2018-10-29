@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { List, ListItem } from '../../components/List';
 import { Col, Row } from '../../components/Grid';
 import { Input, FormBtn } from '../../components/Form';
-import services from '../../utils/services';
+import helper from '../../utils/helper';
 
 
 class Search extends Component {
@@ -13,12 +13,12 @@ class Search extends Component {
         endYear: ''
     };
 
-    // When the form is submitted, use the services.saveArticle method to save the article data
+    // When the form is submitted, use the helper.saveArticle method to save the article data
     // Then reload articles from the database
     handleFormSubmit = event => {
         event.preventDefault();
         if (this.state.title) {
-            services.getArticles({
+            helper.getArticles({
                 title: this.state.title,
                 startYear: this.state.startYear,
                 endYear: this.state.endYear
@@ -36,7 +36,7 @@ class Search extends Component {
     };
 
     handleSaveArticle = (title, url, id) => {
-        services.saveArticle({ title: title, url: url, articleId: id })
+        helper.saveArticle({ title: title, url: url, articleId: id })
             .then(res => this.props.loadSaved())
             .catch(err => console.log(err));
     };
